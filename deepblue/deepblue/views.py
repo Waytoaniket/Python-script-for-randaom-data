@@ -192,6 +192,7 @@ def deepblue(request):
     print("step_out"+str(step_out)+" "+str(len(step_out)))
     print("no_of_waiting_queue"+str(no_of_waiting_queue)+" "+str(len(no_of_waiting_queue)))
     print("created_queue_hours"+str(created_queue_hours)+" "+str(len(created_queue_hours)))
+    #below this is a script for storing data in mysql database
     with connection.cursor() as cursor:
         # sql="INSERT INTO `table 1` VALUES ('Number in the queue/DeptNumber', 'Shift (M/A/E)', 'Queue Type (Reg','Created Queue Hours', 'Created Queue Day of Week', 'Waiting Duration', 'Number of Waiting Queue', 'Arrival Rate', 'Service Rate')"
         # cursor.execute(sql)
@@ -203,10 +204,13 @@ def deepblue(request):
         for i in range(0,len(service_rate1)-1):
             shift=0
             if(created_queue_hours[i]>=8 and created_queue_hours[i]<12):
+                #shift 1 =8 to 12 hours
                 shift=1
             elif(created_queue_hours[i]>=12 and created_queue_hours[i]<16):
+                #shift 2 =12 to 4 hours
                 shift=2
             else:
+                #shift 2 =4 to 10 hours
                 shift=3
 
             SQL="INSERT INTO `table 1` VALUES('{}','{}','{}','{}','{}','{}','{}','{}')".format(str(401),str(shift),str("07/01/2020"),str(created_queue_hours[i]),str(waiting_duration[i]),str(no_of_waiting_queue[i]),str(arrival_rate1[i]),str(service_rate1[i]))
