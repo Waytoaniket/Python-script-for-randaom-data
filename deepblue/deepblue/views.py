@@ -40,7 +40,7 @@ def deepblue(request):
     for i in range(0,1500):
         if(time>=8.00 and time<=18.00):
             minutes=round(random.uniform(0.15,0.30), 2)
-            print(i)
+            # print(i)
             # print(minutes)
             service_time=round(random.uniform(0.25,0.30), 2)
             if(round((step_in[i]+service_time)-float(int((step_in[i]+service_time))),2)>=0.60):
@@ -51,7 +51,7 @@ def deepblue(request):
             # print(round(time-float(int(time)),2))
             if(round(time-float(int(time)),2)>=0.6):
                 time=time+0.40
-            print(time)
+            # print(time)
             total=i
             arriving_time.append(round(time,2))
             if(arriving_time[i+1]>step_out[i]):
@@ -91,7 +91,7 @@ def deepblue(request):
             if(i>=len(arriving_time)):
                     break
             minutes=round(random.uniform(0.20,0.30), 2)
-            print(i)
+            # print(i)
             # print(minutes)
             service_time=round(random.uniform(0.20,0.25), 2)
             if((step_in[i]+service_time)-float(int((step_in[i]+service_time)))>=0.60):
@@ -104,7 +104,7 @@ def deepblue(request):
             if(round(time-float(int(time)),2)>=0.6):
                 time=time+0.40
                 
-            print(time)
+            # print(time)
             total=i
             # arriving_time.append(round(time,2))
             created_queue_hours.append(int(time))
@@ -158,15 +158,15 @@ def deepblue(request):
                 counter+=1
         service_rate.append(counter)
         arrival_rate.append(count)
-        print("time_interval  "+str(time_interval[i])+" "+str(count)+" "+str(counter))
+        # print("time_interval  "+str(time_interval[i])+" "+str(count)+" "+str(counter))
     for j in range(0,len(arriving_time)):
         for i in range(0,99):
             if(arriving_time[j]>=time_interval[i] and arriving_time[j]<(time_interval[i+1])):
-                print("arrival  "+str(time_interval[i])+"      "+str(time_interval[i+1])+"    "+str(arriving_time[j])+"    "+str(arrival_rate[i])+"   "+str(i)+"   "+str(j))
+                # print("arrival  "+str(time_interval[i])+"      "+str(time_interval[i+1])+"    "+str(arriving_time[j])+"    "+str(arrival_rate[i])+"   "+str(i)+"   "+str(j))
                 arrival_rate1.append(str(arrival_rate[i]))
             
             if(step_in[j]>=time_interval[i] and step_in[j]<(time_interval[i+1])):
-                print("service    "+str(time_interval[i])+"      "+str(time_interval[i+1])+"    "+str(step_in[j])+"     "+str(service_rate[i]))
+                # print("service    "+str(time_interval[i])+"      "+str(time_interval[i+1])+"    "+str(step_in[j])+"     "+str(service_rate[i]))
                 service_rate1.append(str(service_rate[i]))
             # if(i==98):
             #     arrival_rate1.append(0)
@@ -216,6 +216,6 @@ def deepblue(request):
             SQL="INSERT INTO `table 1` VALUES('{}','{}','{}','{}','{}','{}','{}','{}')".format(str(401),str(shift),str("07/01/2020"),str(created_queue_hours[i]),str(waiting_duration[i]),str(no_of_waiting_queue[i]),str(arrival_rate1[i]),str(service_rate1[i]))
             print(SQL)
             cursor.execute(SQL)
-    return HttpResponse(arriving_time)
+    return HttpResponse("Successfull")
            
 
